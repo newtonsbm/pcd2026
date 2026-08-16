@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Escola{% endblock %}</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f7f7f7; color: #222; }
+    h1 { color: #2b4c7e; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #2b4c7e; font-weight: bold; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem 0.8rem; text-align: left; }
+    th { background: #2b4c7e; color: #fff; }
+    .card { background: #fff; padding: 1.5rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    a { color: #2b4c7e; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'alunos:lista_alunos' %}">Alunos</a>
+    <a href="{% url 'alunos:lista_cursos' %}">Cursos</a>
+    <a href="/admin/">Admin</a>
+  </nav>
+  <h1>{% block heading %}Escola{% endblock %}</h1>
+  {% block content %}{% endblock %}
+</body>
+</html>

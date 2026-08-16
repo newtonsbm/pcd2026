@@ -1,0 +1,18 @@
+{% extends "alunos/base.html" %}
+
+{% block title %}Cursos{% endblock %}
+{% block heading %}Cursos oferecidos{% endblock %}
+
+{% block content %}
+  <div class="card">
+    {% if cursos %}
+    <ul>
+      {% for curso in cursos %}
+      <li>{{ curso.nome }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Nenhum curso cadastrado ainda.</p>
+    {% endif %}
+  </div>
+{% endblock %}

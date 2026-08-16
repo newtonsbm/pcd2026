@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Ambiente de exemplo para rodar uma aplicacao Django com banco de dados
+# PostgreSQL, tudo dentro de uma VM Alpine bem enxuta.
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/alpine318"
+  config.vm.box_version = "4.3.12"
+
+  config.vm.network "forwarded_port", guest: 8000, host: 8083
+
+  # Monta a pasta do projeto em um caminho explicito dentro da VM.
+  config.vm.synced_folder ".", "/app"
+
+  # VM enxuta: Alpine + Django + Postgres rodam bem com poucos recursos.
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+    vb.cpus = 1
+  end
+
+  # A logica de provisionamento fica em provision.sh (script separado,
+  # mais facil de ler e editar do que um heredoc gigante aqui dentro).
+  config.vm.provision "shell", path: "provision.sh"
+end

@@ -1,0 +1,14 @@
+{% extends "alunos/base.html" %}
+
+{% block title %}{{ aluno.nome }}{% endblock %}
+{% block heading %}{{ aluno.nome }}{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <p><strong>Email:</strong> {{ aluno.email }}</p>
+    <p><strong>Curso:</strong> {{ aluno.curso }}</p>
+    <p><strong>Data de nascimento:</strong> {{ aluno.data_nascimento }}</p>
+    <p><strong>Matriculado em:</strong> {{ aluno.matriculado_em }}</p>
+    <p><a href="{% url 'alunos:lista_alunos' %}">&laquo; Voltar para a lista</a></p>
+  </div>
+{% endblock %}

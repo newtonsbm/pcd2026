@@ -1,0 +1,24 @@
+{% extends "alunos/base.html" %}
+
+{% block title %}Lista de alunos{% endblock %}
+{% block heading %}Alunos matriculados{% endblock %}
+
+{% block content %}
+  <div class="card">
+    {% if alunos %}
+    <table>
+      <tr><th>Nome</th><th>Email</th><th>Curso</th><th>Nascimento</th></tr>
+      {% for aluno in alunos %}
+      <tr>
+        <td><a href="{% url 'alunos:detalhe_aluno' aluno.id %}">{{ aluno.nome }}</a></td>
+        <td>{{ aluno.email }}</td>
+        <td>{{ aluno.curso }}</td>
+        <td>{{ aluno.data_nascimento }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>Nenhum aluno cadastrado ainda. Use o <a href="/admin/">painel de admin</a> para cadastrar.</p>
+    {% endif %}
+  </div>
+{% endblock %}
