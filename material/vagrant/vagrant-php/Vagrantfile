@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Ambiente de exemplo para rodar um projeto PHP com Apache.
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/alpine318"
+  config.vm.box_version = "4.3.12"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8082
+
+  # Monta a pasta do projeto em um caminho explicito dentro da VM.
+  config.vm.synced_folder ".", "/app"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apk update
+    apk add apache2 php82 php82-apache2 php82-session php82-mbstring
+    cp /app/index.php /var/www/localhost/htdocs/index.php
+    rm -f /var/www/localhost/htdocs/index.html
+    rc-update add apache2 default
+    service apache2 restart
+  SHELL
+end
