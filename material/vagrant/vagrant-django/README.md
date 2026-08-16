@@ -10,15 +10,23 @@ PostgreSQL como banco de dados.
 vagrant up
 ```
 
-O provisionamento faz tudo automaticamente:
+O provisionamento faz tudo automaticamente, usando os valores definidos em
+[`.env`](.env):
 
 - instala Python, PostgreSQL e o driver `psycopg2` via `apk`;
-- cria o banco `escola` e o usuario `django` (senha `django`);
+- cria o banco e o usuario do Postgres (`POSTGRES_DB` / `POSTGRES_USER` /
+  `POSTGRES_PASSWORD`);
 - cria um virtualenv em `/opt/venv` e instala o Django;
 - roda as migracoes do banco;
-- cria um super usuario do Django (`admin` / `admin123`);
+- cria um super usuario do Django (`DJANGO_SUPERUSER_USERNAME` /
+  `DJANGO_SUPERUSER_PASSWORD`);
 - inicia o servidor de desenvolvimento (`manage.py runserver`) e o deixa
   configurado para subir automaticamente sempre que a VM reiniciar.
+
+O `.env` ja vem preenchido com valores de desenvolvimento (banco `escola`,
+usuario `django`, superusuario `admin`/`admin123`) para o ambiente subir
+sem nenhum passo manual. Para mudar alguma credencial, edite o `.env` e
+rode `vagrant provision` novamente.
 
 ## Acessando
 
@@ -68,5 +76,5 @@ vagrant destroy
 ```
 
 > Este projeto usa configuracoes simplificadas de proposito (SECRET_KEY
-> fixa, DEBUG ligado, senha do banco em texto puro) para fins didaticos.
-> Nao utilize estas configuracoes em producao.
+> fixa, DEBUG ligado, `.env` versionado no git com senha em texto puro)
+> para fins didaticos. Nao utilize estas configuracoes em producao.

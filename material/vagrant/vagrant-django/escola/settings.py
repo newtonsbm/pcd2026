@@ -9,9 +9,13 @@ DEBUG ligado, ALLOWED_HOSTS liberado).
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "chave-de-desenvolvimento-nao-use-em-producao"
+load_dotenv(BASE_DIR / ".env")
+
+SECRET_KEY = os.environ.get("SECRET_KEY", "chave-de-desenvolvimento-nao-use-em-producao")
 
 DEBUG = True
 
@@ -58,7 +62,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "escola.wsgi.application"
 
 # Banco de dados PostgreSQL, criado pelo provisionamento do Vagrant.
-# Os valores padrao abaixo casam com o que o Vagrantfile configura na VM.
+# Os valores vem do .env; os defaults abaixo sao so uma rede de seguranca
+# caso o arquivo nao exista.
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
