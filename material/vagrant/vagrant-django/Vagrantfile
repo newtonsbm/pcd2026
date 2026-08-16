@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 1
   end
 
-  # A logica de provisionamento fica em provision.sh (script separado,
-  # mais facil de ler e editar do que um heredoc gigante aqui dentro).
-  config.vm.provision "shell", path: "provision.sh"
+  # A logica de provisionamento fica isolada em provision/ (script
+  # principal, seed do banco e script de boot do Django).
+  config.vm.provision "shell", path: "provision/provision.sh"
 end

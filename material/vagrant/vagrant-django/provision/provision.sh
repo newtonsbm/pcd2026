@@ -12,7 +12,7 @@ rc-service postgresql setup || true
 rc-service postgresql start || rc-service postgresql restart
 
 # Cria o usuario e o banco da aplicacao (operacao idempotente).
-su -s /bin/sh postgres -c "psql -f /app/seed.sql"
+su -s /bin/sh postgres -c "psql -f /app/provision/seed.sql"
 su -s /bin/sh postgres -c "psql -lqt" | cut -d '|' -f1 | grep -qw escola || \
   su -s /bin/sh postgres -c "createdb -O django escola"
 
@@ -29,11 +29,7 @@ DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@escola.local DJANGO
   /opt/venv/bin/python manage.py createsuperuser --noinput || true
 
 # Inicia o servidor de desenvolvimento do Django automaticamente no boot.
-cat > /etc/local.d/django.start <<'EOF'
-#!/bin/sh
-cd /app
-/opt/venv/bin/python manage.py runserver 0.0.0.0:8000 >> /var/log/django.log 2>&1 &
-EOF
+cp /app/provision/django.start.sh /etc/local.d/django.start
 chmod +x /etc/local.d/django.start
 rc-update add local default
 /etc/local.d/django.start
