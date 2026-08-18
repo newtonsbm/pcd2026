@@ -11,7 +11,7 @@ Instalar o Docker, executar um CMS ou uma plataforma de blog em um container, co
 - Configure o mapeamento de portas para que a aplicação fique acessível no navegador do hospedeiro.
 - Abra a aplicação no navegador e confirme que ela está funcionando corretamente.
 - Tire uma print da aplicação acessada pelo navegador do host.
-- Salve a imagem na pasta da atividade.
+- Salve a imagem na pasta `resolucao`
 - Faça o commit e o push da atividade com a evidência da ferramenta em funcionamento.
 - Para procurar imagens no Docker Hub: https://hub.docker.com/search
 
