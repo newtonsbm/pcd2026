@@ -119,7 +119,6 @@ docker system prune -a
 4. Salve a imagem na pasta da atividade.
 5. Registre a execução no notebook Jupyter com os comandos utilizados e o resultado obtido.
 6. Faça o commit e o push do projeto com a imagem de evidência.
-d
 
 ## Critérios de avaliação
 
